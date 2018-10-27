@@ -40,6 +40,7 @@
 #define RT_NO        0
 #define RT_RGBA8888  1
 #define RT_RGB565    2
+#define RT_RGBA16F   3  // Use RGBA64 to keep valid?
 
 struct vc4_format {
         /** Set if the pipe format is defined in the table. */
@@ -104,6 +105,8 @@ static const struct vc4_format vc4_format_table[] = {
 
         FORMAT(L8A8_UNORM, NO, LUMALPHA, SWIZ(X, X, X, W)),
         FORMAT(R8G8_UNORM, NO, LUMALPHA, SWIZ(X, W, 0, 1)),
+
+        FORMAT(R16G16B16A16_FLOAT, RGBA16F, RGBA64, SWIZ(X, Y, Z, W)),
 };
 
 static const struct vc4_format *

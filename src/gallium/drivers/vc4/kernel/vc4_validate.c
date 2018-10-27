@@ -647,10 +647,12 @@ reloc_tex(struct vc4_exec_info *exec,
 		width = (width + 3) >> 2;
 		height = (height + 3) >> 2;
 		break;
+	case VC4_TEXTURE_TYPE_RGBA64:
+		cpp = 8;
+		break;
 	case VC4_TEXTURE_TYPE_BW1:
 	case VC4_TEXTURE_TYPE_A4:
 	case VC4_TEXTURE_TYPE_A1:
-	case VC4_TEXTURE_TYPE_RGBA64:
 	case VC4_TEXTURE_TYPE_YUV422R:
 	default:
 		DRM_ERROR("Texture format %d unsupported\n", type);
