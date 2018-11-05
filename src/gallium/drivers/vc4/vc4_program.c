@@ -617,7 +617,12 @@ ntq_emit_tex(struct vc4_compile *c, nir_tex_instr *instr)
                         dest[i] = depth_output;
         } else {
                 for (int i = 0; i < 4; i++)
-                        dest[i] = qir_UNPACK_8_F(c, tex, i);
+                        if (c->key->tex[unit].format == PIPE_FORMAT_R16G16B16A16_FLOAT) {
+                                // TODO(kreeger) - unpack 8 or 16 as needed!
+                                /* dest[i] = qir_UNPACK_8_F(c, tex, i); */
+                        } else {
+                                dest[i] = qir_UNPACK_8_F(c, tex, i);
+                        }
         }
 }
 

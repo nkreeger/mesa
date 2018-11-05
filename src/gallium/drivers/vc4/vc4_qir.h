@@ -329,8 +329,7 @@ struct vc4_key {
         struct {
                 enum pipe_format format;
                 uint8_t swizzle[4];
-                // TODO(kreeger): Add 'is_float_texture' here?
-                uint8_t return_size;
+                uint8_t return_size;  // Needed?
                 union {
                         struct {
                                 unsigned compare_mode:1;
