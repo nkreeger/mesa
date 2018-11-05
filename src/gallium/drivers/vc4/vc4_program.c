@@ -939,6 +939,15 @@ ntq_emit_pack_unorm_4x8(struct vc4_compile *c, nir_alu_instr *instr)
         ntq_store_dest(c, &instr->dest.dest, 0, qir_MOV(c, result));
 }
 
+/**
+ * TODO(kreeger): Document me.
+ */
+static void
+ntq_emit_pack_half_2x16(struct vc4_compile *c, nir_alu_instr *instr)
+{
+        // TODO(kreeger): Write me
+}
+
 /** Handles sign-extended bitfield extracts for 16 bits. */
 static struct qreg
 ntq_emit_ibfe(struct vc4_compile *c, struct qreg base, struct qreg offset,
@@ -1142,6 +1151,11 @@ ntq_emit_alu(struct vc4_compile *c, nir_alu_instr *instr)
                 return;
         }
 
+        if (instr->op == nir_op_pack_half_2x16) {
+                ntq_emit_pack_half_2x16(c, instr);
+                return;
+        }
+
         if (instr->op == nir_op_unpack_unorm_4x8) {
                 struct qreg src = ntq_get_src(c, instr->src[0].src,
                                               instr->src[0].swizzle[0]);
@@ -1151,6 +1165,12 @@ ntq_emit_alu(struct vc4_compile *c, nir_alu_instr *instr)
                                                qir_UNPACK_8_F(c, src, i));
                 }
                 return;
+        }
+
+        if (instr->op == nir_op_unpack_half_2x16) {
+          //
+          // TODO(kreeger): Write me.
+          //
         }
 
         /* General case: We can just grab the one used channel per src. */
@@ -2721,6 +2741,8 @@ vc4_setup_shared_key(struct vc4_context *vc4, struct vc4_key *key,
 
                 if (!sampler)
                         continue;
+
+                // TODO(kreeger): Assign "is_float_texture" here.
 
                 key->tex[i].format = sampler->format;
                 key->tex[i].swizzle[0] = sampler->swizzle_r;

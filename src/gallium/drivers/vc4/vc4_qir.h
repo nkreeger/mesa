@@ -329,6 +329,8 @@ struct vc4_key {
         struct {
                 enum pipe_format format;
                 uint8_t swizzle[4];
+                // TODO(kreeger): Add 'is_float_texture' here?
+                uint8_t return_size;
                 union {
                         struct {
                                 unsigned compare_mode:1;
@@ -352,6 +354,7 @@ struct vc4_fs_key {
         bool stencil_enabled;
         bool stencil_twoside;
         bool stencil_full_writemasks;
+        bool is_float_render_target;  // TODO(kreeger): Use this.
         bool is_points;
         bool is_lines;
         bool point_coord_upper_left;
@@ -360,6 +363,7 @@ struct vc4_fs_key {
         bool sample_coverage;
         bool sample_alpha_to_coverage;
         bool sample_alpha_to_one;
+        // TODO(kreeger): Add 'is_float_render_target' here.
         uint8_t alpha_test_func;
         uint8_t logicop_func;
         uint32_t point_sprite_mask;

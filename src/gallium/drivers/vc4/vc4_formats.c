@@ -40,13 +40,13 @@
 #define RT_NO        0
 #define RT_RGBA8888  1
 #define RT_RGB565    2
-#define RT_RGBA16F   3  // Use RGBA64 to keep valid?
+#define RT_RGBA16F   3
 
 struct vc4_format {
         /** Set if the pipe format is defined in the table. */
         bool present;
 
-        /** Set to 0 if unsupported, 1 if RGBA8888, 2 if rgb565. */
+        /** Set to 0 if unsupported, 1 if RGBA8888, 2 if rgb565, 3 if RGBA16F */
         uint8_t rt_type;
 
         /** One of VC4_TEXTURE_TYPE_*. */
@@ -59,6 +59,9 @@ struct vc4_format {
          * value into shader rgba values.
          */
         uint8_t swizzle[4];
+
+        /* Whether the return value is 16F/I/UI or 32F/I/UI. */
+        uint8_t return_size;
 };
 
 #define SWIZ(x,y,z,w) {          \
