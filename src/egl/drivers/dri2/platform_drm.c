@@ -788,6 +788,7 @@ dri2_initialize_drm(_EGLDriver *drv, _EGLDisplay *disp)
     */
    dri2_dpy->vtbl = &dri2_drm_display_vtbl;
 
+   fprintf(stderr, "---> EGL_TRUE\n");
    return EGL_TRUE;
 
 cleanup:

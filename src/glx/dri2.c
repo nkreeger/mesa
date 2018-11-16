@@ -299,7 +299,11 @@ DRI2Connect(Display * dpy, XID window, char **driverName, char **deviceName)
       return False;
    }
 
+   fprintf(stderr, "rep.length: %lu\n", rep.length);
+   fprintf(stderr, "rep.type: %x\n", rep.type);
+
    if (rep.driverNameLength == 0 && rep.deviceNameLength == 0) {
+      fprintf(stderr, "Bad driver info...\n");
       UnlockDisplay(dpy);
       SyncHandle();
       return False;

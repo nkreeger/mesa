@@ -692,6 +692,7 @@ get_string(struct gl_context *ctx, GLenum pname)
 	case GL_VENDOR:
 	    return (const GLubyte *) swrast_vendor_string;
 	case GL_RENDERER:
+            fprintf(stderr, "$$ HAHA getting string from swrast driver\n");
 	    return (const GLubyte *) swrast_renderer_string;
 	default:
 	    return NULL;

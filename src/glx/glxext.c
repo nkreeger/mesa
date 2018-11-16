@@ -819,10 +819,14 @@ AllocAndFetchScreenConfigs(Display * dpy, struct glx_display * priv)
       if (priv->dri3Display)
          psc = (*priv->dri3Display->createScreen) (i, priv);
 #endif /* HAVE_DRI3 */
-      if (psc == NULL && priv->dri2Display)
+      if (psc == NULL && priv->dri2Display) {
 	 psc = (*priv->dri2Display->createScreen) (i, priv);
-      if (psc == NULL && priv->driDisplay)
+         fprintf(stderr, "... checking dri2Display\n");
+      }
+      if (psc == NULL && priv->driDisplay) {
+         fprintf(stderr, "... checking driDisplay\n");
 	 psc = (*priv->driDisplay->createScreen) (i, priv);
+      }
 #endif /* GLX_USE_DRM */
 
 #ifdef GLX_USE_WINDOWSGL
@@ -830,8 +834,10 @@ AllocAndFetchScreenConfigs(Display * dpy, struct glx_display * priv)
 	 psc = (*priv->windowsdriDisplay->createScreen) (i, priv);
 #endif
 
-      if (psc == NULL && priv->driswDisplay)
+      if (psc == NULL && priv->driswDisplay) {
+         fprintf(stderr, "... checking driswDisplay\n");
 	 psc = (*priv->driswDisplay->createScreen) (i, priv);
+      }
 #endif /* GLX_DIRECT_RENDERING && !GLX_USE_APPLEGL */
 
 #if defined(GLX_USE_APPLEGL)

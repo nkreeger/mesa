@@ -1219,10 +1219,16 @@ dri2CreateScreen(int screen, struct glx_display * priv)
       return NULL;
    }
 
+   fprintf(stderr, "dri2CreateDrawable: %d\n", screen);
+
    if (!DRI2Connect(priv->dpy, RootWindow(priv->dpy, screen),
 		    &driverName, &deviceName)) {
       glx_screen_cleanup(&psc->base);
       free(psc);
+
+      fprintf(stderr, "deviceName: %s\n", deviceName);
+      fprintf(stderr, "driverName: %s\n", driverName);
+      /* InfoMessageF("---> DRIVER: %n\n", deviceName); */
       InfoMessageF("screen %d does not appear to be DRI2 capable\n", screen);
       return NULL;
    }
@@ -1434,6 +1440,8 @@ dri2CreateDisplay(Display * dpy)
 
    pdp->base.destroyDisplay = dri2DestroyDisplay;
    pdp->base.createScreen = dri2CreateScreen;
+
+   fprintf(stderr, "dri2CreateDisplay()\n");
 
    i = 0;
    if (pdp->driMinor < 1)

@@ -97,6 +97,8 @@ dri_message(int level, const char *f, ...)
 _X_HIDDEN void *
 driOpenDriver(const char *driverName)
 {
+   fprintf(stderr, "---> driOpenDriver(): %s\n", driverName);
+
    void *glhandle, *handle;
    const char *libPaths, *p, *next;
    char realDriverName[200];
