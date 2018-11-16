@@ -740,6 +740,7 @@ dri2_initialize_drm(_EGLDriver *drv, _EGLDisplay *disp)
 
    dri2_dpy->gbm_dri = gbm_dri_device(gbm);
    dri2_dpy->driver_name = strdup(dri2_dpy->gbm_dri->driver_name);
+   fprintf(stderr, "$$$ DRIVER_NAME: %s\n", dri2_dpy->gbm_dri->driver_name);
 
    dri2_dpy->dri_screen = dri2_dpy->gbm_dri->screen;
    dri2_dpy->core = dri2_dpy->gbm_dri->core;
